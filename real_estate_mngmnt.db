@@ -22,7 +22,7 @@ CREATE TABLE Branch (
 -- =====================================================
 CREATE TABLE Staff (
 	StaffID INT AUTO_INCREMENT PRIMARY KEY
-	BranchID VARCHAR(10) NOT NULL,
+	BranchID INT NOT NULL,
 	FirstName VARCHAR(50) NOT NULL,
 	LastName VARCHAR(50) NOT NULL,
 	Address VARCHAR(200),
@@ -43,7 +43,7 @@ CREATE TABLE Staff (
 -- =====================================================
 CREATE TABLE Supervisor (
 	SupervisorID INT AUTO_INCREMENT PRIMARY KEY,
-	StaffID VARCHAR(10) NOT NULL UNIQUE,
+	StaffID INT NOT NULL,
 	CarAllowance DECIMAL(10,2),
 	BonusPayment DECIMAL(10,2),
 	HireDate DATE NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE Supervisor (
 -- =====================================================
 CREATE TABLE NextOfKin (
 	KinID INT AUTO_INCREMENT PRIMARY KEY,
-	StaffID VARCHAR(10) NOT NULL,
+	StaffID INT NOT NULL,
 	FullName VARCHAR(100) NOT NULL,
 	Relationship VARCHAR(50),
 	Address VARCHAR(200),
@@ -88,7 +88,7 @@ CREATE TABLE Owner (
 -- =====================================================
 CREATE TABLE Property (
 	PropertyID INT AUTO_INCREMENT PRIMARY KEY
-	StaffID VARCHAR(10),
+	StaffID INT,
 	OwnerID INT,
 	PropertyTypeID INT,
 	StreetName VARCHAR(100),
@@ -112,8 +112,8 @@ CREATE TABLE Property (
 -- =====================================================
 CREATE TABLE Renter (
 	RenterID INT AUTO_INCREMENT PRIMARY KEY,
-	BranchID VARCHAR(10),
-	StaffID VARCHAR(10),
+	BranchID INT,
+	StaffID INT,
 	FirstName VARCHAR(50),
 	LastName VARCHAR(50),
 	Address VARCHAR(200),
@@ -130,7 +130,7 @@ CREATE TABLE Renter (
 -- =====================================================
 CREATE TABLE ProspectiveRenter (
   ProspectiveRenterID INT AUTO_INCREMENT PRIMARY KEY,
-	BranchID VARCHAR(10),
+	BranchID INT,
 	PropertyTypeID INT,
 	FirstName VARCHAR(50),
 	LastName VARCHAR(50),
@@ -156,9 +156,9 @@ CREATE TABLE PaymentMethod (
 -- =====================================================
 CREATE TABLE Lease (
 	LeaseID INT AUTO_INCREMENT PRIMARY KEY,
-	PropertyID VARCHAR(10),
-	RenterID VARCHAR(10),
-	StaffID VARCHAR(10),
+	PropertyID INT,
+	RenterID INT,
+	StaffID INT,
 	PaymentMethodID INT,
 	Rent DECIMAL(10,2),
 	DepositAmount DECIMAL(10,2),
@@ -188,8 +188,8 @@ CREATE TABLE Lease (
 -- =====================================================
 CREATE TABLE Inspection (
 	InspectionID INT AUTO_INCREMENT PRIMARY KEY,
-	PropertyID VARCHAR(10),
-	StaffID VARCHAR(10),
+	PropertyID INT),
+	StaffID INT,
 	InspectDate DATE NOT NULL,
 	Notes TEXT,
 	FOREIGN KEY (PropertyID) REFERENCES Property(PropertyID)
